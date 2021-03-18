@@ -46,7 +46,8 @@ namespace XinZhao{
             mainMenu.Attach();
             GameEvent.OnGameTick += OnGameUpdate;
             Drawing.OnDraw += OnDraw;
-           
+            Orbwalker.OnAfterAttack +=OnAfterAttack;
+
    
            
         }
