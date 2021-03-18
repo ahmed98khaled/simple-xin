@@ -17,11 +17,11 @@ namespace XinZhao{
         public static void OnGameLoad(){
             if(GameObjects.Player.CharacterName != "XinZhao") return;
             Q = new Spell(SpellSlot.Q);
-            W = new Spell(SpellSlot.W, 900f);
+            W = new Spell(SpellSlot.W, 1000f);
             E = new Spell(SpellSlot.E, 650f);
             R = new Spell(SpellSlot.R, 450f);
             E.SetTargetted(0,float.MaxValue);
-            W.SetSkillshot(0.5f, 40f, float.MaxValue, false,SpellType.Line);
+            W.SetSkillshot(0.5f, 40f, 6250f, false,SpellType.Line);
           
             mainMenu = new Menu("XinZhao","SimpleZhao",true);
             var Combo = new Menu("Combo","Combo Settings");
@@ -54,7 +54,7 @@ namespace XinZhao{
         
         private static void ComboLogic()
         {
-            var target = TargetSelector.GetTarget(E.Range);
+            var target = TargetSelector.GetTarget(W.Range);
             var targetQ = TargetSelector.GetTarget(175);
             var inputW = W.GetPrediction(target);
 
