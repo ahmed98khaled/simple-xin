@@ -54,7 +54,7 @@ namespace XinZhao{
         
         private static void ComboLogic()
         {
-            var target = TargetSelector.GetTarget(W.Range);
+            var target = TargetSelector.GetTarget(E.Range);
             var targetQ = TargetSelector.GetTarget(175);
             var inputW = W.GetPrediction(target);
 
