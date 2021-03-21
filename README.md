@@ -9,6 +9,6 @@ combo Q,W,E,R
 
 Heatmangement
        
-       if you have any feedback join discord https://discord.gg/UJJZ4NzB
+      
        
        
