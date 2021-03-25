@@ -56,7 +56,7 @@ namespace XinZhao{
             if(mainMenu["Combo"].GetValue<MenuBool>("Wuse").Enabled && W.IsReady() && targetW.IsValidTarget()&& inputW.Hitchance >= HitChance.High && W.IsInRange(inputW.CastPosition))  W.Cast(inputW.CastPosition);
             if(mainMenu["Combo"].GetValue<MenuBool>("Ruse").Enabled && R.IsReady() && GameObjects.Player.CountEnemyHeroesInRange(R.Range) > 0)
             {
-                foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget() && R.GetDamage(x) > x.Health)) W.CastIfHitchanceMinimum(target, HitChance.Medium);
+                foreach (var target in GameObjects.EnemyHeroes.Where(x => x.IsValidTarget() && R.GetDamage(x) > x.Health)) R.Cast(target);
             }
         }
         private static void HarassLogic()
