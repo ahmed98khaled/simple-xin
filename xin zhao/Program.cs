@@ -22,7 +22,7 @@ namespace XinZhao{
             E = new Spell(SpellSlot.E, Range_E);
             R = new Spell(SpellSlot.R, 450f);
             E.SetTargetted(0,float.MaxValue);
-            W.SetSkillshot(0.5f*4, 10f,float.MaxValue, false,SpellType.Line);
+            W.SetSkillshot(0.5f, 10f,6250f, false,SpellType.Line);
             mainMenu = new Menu("XinZhao","SimpleZhao",true);
             var Combo = new Menu("Combo","Combo Settings");
             Combo.Add(new MenuBool("Quse","Use Q",true));
