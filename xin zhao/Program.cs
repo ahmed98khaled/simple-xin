@@ -18,16 +18,17 @@ namespace XinZhao{
         public static void OnGameLoad(){
             if(GameObjects.Player.CharacterName != "XinZhao") return;
             Q = new Spell(SpellSlot.Q);
-            W = new Spell(SpellSlot.W, 1000f) {AddHitBox = true};
+            W = new Spell(SpellSlot.W, 900f) {AddHitBox = true};
             E = new Spell(SpellSlot.E, Range_E);
             R = new Spell(SpellSlot.R, 450f);
             E.SetTargetted(0,float.MaxValue);
-            W.SetSkillshot(0.5f, 10f,6250f, false,SpellType.Line);
+            W.SetSkillshot(0.5f*0.75f, 10f,6250f, false,SpellType.Line);
             mainMenu = new Menu("XinZhao","SimpleZhao",true);
             var Combo = new Menu("Combo","Combo Settings");
             Combo.Add(new MenuBool("Quse","Use Q",true));
             Combo.Add(new MenuBool("Wuse","Use W",true));
             Combo.Add(new MenuBool("Euse","Use E",true));
+            Combo.Add(new MenuBool("E2use","Use E at new range (Beta)",false));
             Combo.Add(new MenuBool("Ruse","Use R",true));
             mainMenu.Add(Combo);
             var Harass = new Menu("Harass","Harass Settings");
@@ -52,7 +53,7 @@ namespace XinZhao{
             var inputW = W.GetPrediction(targetW);
             var targetE = E.GetTarget();
             if(mainMenu["Combo"].GetValue<MenuBool>("Euse").Enabled && E.IsReady() && targetE.IsValidTarget())  E.Cast(targetE);
-            if(mainMenu["Combo"].GetValue<MenuBool>("Euse").Enabled && E.IsReady() && targetW.IsValidTarget()&& targetW.HasBuff("xinzhaorlasttargetattacked"))  E.Cast(targetW);
+            if(mainMenu["Combo"].GetValue<MenuBool>("E2use").Enabled && E.IsReady() && targetW.IsValidTarget()&& targetW.HasBuff("slow") && !W.IsReady())  E.Cast(targetW);
             if(mainMenu["Combo"].GetValue<MenuBool>("Wuse").Enabled && W.IsReady() && targetW.IsValidTarget()&& inputW.Hitchance >= HitChance.High && W.IsInRange(inputW.CastPosition))  W.Cast(inputW.CastPosition);
             if(mainMenu["Combo"].GetValue<MenuBool>("Ruse").Enabled && R.IsReady() && GameObjects.Player.CountEnemyHeroesInRange(R.Range) > 0)
             {
@@ -89,7 +90,7 @@ namespace XinZhao{
            var PlayerPos = GameObjects.Player.Position;
             if(mainMenu["Draw"].GetValue<MenuBool>("lista").Enabled){
                 if(mainMenu["Draw"].GetValue<MenuBool>("qRange").Enabled) if(Q.IsReady()) Render.Circle.DrawCircle(PlayerPos, Q.Range,System.Drawing.Color.Cyan,1);
-                if(mainMenu["Draw"].GetValue<MenuBool>("wRange").Enabled) if(W.IsReady()) Render.Circle.DrawCircle(PlayerPos, W.Range,System.Drawing.Color.Silver,1);
+                if(mainMenu["Draw"].GetValue<MenuBool>("wRange").Enabled) if(W.IsReady()) Render.Circle.DrawCircle(PlayerPos, W.Range + 100,System.Drawing.Color.Silver,1);
                 if(mainMenu["Draw"].GetValue<MenuBool>("eRange").Enabled) if(E.IsReady())Render.Circle.DrawCircle(PlayerPos, E.Range,System.Drawing.Color.Yellow,1);
             }
         }
